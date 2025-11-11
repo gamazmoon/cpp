@@ -8,6 +8,7 @@ int main()
     cout << "test1\ntest2";
 
     cout << "\n 2----------- \n";
+    // 2. \t (تب - tab). معادل چند فاصله
     cout << "test1\ttest2";
 
     // 3. \" (نقل قول دوبل - Double Quote)
