@@ -9,19 +9,19 @@ int main()
 {
     // تعریف متغیرها
     const double PI = 3.14159;
-    double radius = 3; //شعاع دایره
+    double radius = 3; // شعاع دایره
     double area, perimeter;
 
-    cout << "برنامه محاسبه مساحت و محیط دایره" << endl;
-    cout << "--------------------------------" << endl;
+    cout << "برنامه محاسبه مساحت و محیط دایره" << "\n";
+    cout << "--------------------------------" << "\n";
 
     // محاسبات
     area = PI * radius * radius;
     perimeter = 2 * PI * radius;
 
     // نمایش خروجی
-    cout << "مساحت دایره: " << area << endl;
-    cout << "محیط دایره: " << perimeter << endl;
+    cout << "مساحت دایره: " << area << "\n";
+    cout << "محیط دایره: " << perimeter << "\n";
 
     return 0;
 }
