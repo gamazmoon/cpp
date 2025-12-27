@@ -1,11 +1,15 @@
 #include <iostream>
 using namespace std;
 
+/*
+محاسبه مساحت و محیط یک دایره با شعاع ۳
+*/
+
 int main()
 {
     // تعریف متغیرها
     const double PI = 3.14159;
-    double radius = 3;
+    double radius = 3; //شعاع دایره
     double area, perimeter;
 
     cout << "برنامه محاسبه مساحت و محیط دایره" << endl;
