@@ -3,24 +3,25 @@ using namespace std;
 
 int main()
 {
+    // تعریف دو متغیر عدد صحیح
     int x = 11, y = 5;
 
-    // 1) Multiplication: Standard arithmetic
+    // ۱) ضرب (Multiplication): محاسبات استاندارد ریاضی
     cout << "1) multiplication\n";
-    cout << 3 * 30 << "\n";  // Literal multiplication (90)
-    cout << 2 * y << "\n";   // Constant multiplied by variable (10)
-    cout << x * y << "\n\n"; // Variable multiplied by variable (55)
+    cout << 3 * 30 << "\n";  // ضرب مستقیم اعداد (۹۰)
+    cout << 2 * y << "\n";   // ضرب عدد ثابت در متغیر (۱۰)
+    cout << x * y << "\n\n"; // ضرب متغیر در متغیر (۵۵)
 
-    // 2) Division: Note the difference between Integer and Double results
+    // ۲) تقسیم (Division): توجه به تفاوت بین نتیجه عدد صحیح و اعشاری
     cout << "2) division\n";
-    cout << 11 / 5 << "\n";   // Integer division: truncates decimal (Result: 2)
-    cout << 11 / 5.0 << "\n"; // Floating-point division: 5.0 forces a double result (Result: 2.2)
-    cout << x / y << "\n\n";  // Integer variables: results in an integer (Result: 2)
+    cout << 11 / 5 << "\n";   // تقسیم صحیح: بخش اعشاری حذف می‌شود (نتیجه: ۲)
+    cout << 11 / 5.0 << "\n"; // تقسیم اعشاری: وجود ۵.۰ باعث می‌شود نتیجه دقیق باشد (نتیجه: ۲.۲)
+    cout << x / y << "\n\n";  // تقسیم دو متغیر صحیح: نتیجه باز هم یک عدد صحیح است (نتیجه: ۲)
 
-    // 3) Modulus: Returns the remainder of a division
+    // ۳) باقی‌مانده (Modulus): باقی‌مانده تقسیم را برمی‌گرداند
     cout << "3) mod\n";
-    cout << 11 % 5 << "\n"; // 11 divided by 5 is 2 with a remainder of 1
-    cout << x % y << "\n";  // Remainder of 11 / 5 (Result: 1)
+    cout << 11 % 5 << "\n"; // ۱۱ تقسیم بر ۵ می‌شود ۲ و باقی‌مانده ۱ می‌شود
+    cout << x % y << "\n";  // باقی‌مانده تقسیم ۱۱ بر ۵ (نتیجه: ۱)
 
     return 0;
 }

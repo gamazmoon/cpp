@@ -3,25 +3,25 @@ using namespace std;
 
 int main()
 {
-    // 1) Simple Assignment: Initializes x with a value
+    // ۱) مقداردهی ساده: متغیر x را با یک مقدار اولیه ایجاد می‌کند
     int x = 11;
     cout << "1) Initial value: " << x << "\n";
 
-    // 2) Reassignment: Overwrites the old value (11) with a new one
+    // ۲) مقداردهی مجدد: مقدار قبلی (۱۱) را پاک کرده و مقدار جدید را جایگزین می‌کند
     x = 100;
     cout << "2) After reassignment: " << x << "\n";
 
-    // 3) Update Assignment: Uses the current value to calculate a new one
-    // Logic: "New value of x = Old value of x (100) + 1"
+    // ۳) به‌روزرسانی متغیر: از مقدار فعلی برای محاسبه مقدار جدید استفاده می‌کند
+    // منطق: "مقدار جدید x = مقدار فعلی x (یعنی ۱۰۰) + ۱"
     x = x + 1;
     cout << "3) After x = x + 1: " << x << "\n";
 
-    // 4) Compound Assignment: Shorthand for updating variables
-    x += 5; // Equivalent to x = x + 5
+    // ۴) عملگرهای ترکیبی: روشی کوتاه برای به‌روزرسانی متغیرها
+    x += 5; // معادل است با x = x + 5
     cout << "4) After x += 5: " << x << "\n";
 
-    // 5) Increment Operator: Specifically adds 1
-    x++; // Equivalent to x = x + 1
+    // ۵) عملگر افزایش (Increment): به طور خاص ۱ واحد به متغیر اضافه می‌کند
+    x++; // معادل است با x = x + 1 یا x += 1
     cout << "5) After x++: " << x << "\n";
 
     return 0;
