@@ -25,4 +25,6 @@ int main()
     {
         cout << "The number is either greater than or equal to 10." << endl;
     }
+
+    return 0;
 }
