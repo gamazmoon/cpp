@@ -3,7 +3,7 @@ using namespace std;
 
 int main()
 {
-    float score;
+    double score;
     cout << "Enter your score (0-20): ";
     cin >> score;
 
