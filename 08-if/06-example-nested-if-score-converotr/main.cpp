@@ -3,54 +3,54 @@ using namespace std;
 
 int main()
 {
-    double score;
-    cout << "لطفاً نمره خود را وارد کنید: ";
+    float score;
+    cout << "Enter your score (0-20): ";
     cin >> score;
 
-    // ۱) ابتدا بررسی نمرات منفی
-    if (score < 0)
+    // ۱) بررسی سقف نمره (بیشتر از ۲۰ نباشد)
+    if (score > 20)
     {
-        cout << "نمره نامعتبر است (کمتر از صفر)." << endl;
+        cout << "Invalid: Score cannot be greater than 20)" << endl;
     }
     else
     {
-        // ۲) بررسی نمرات مردود (بین ۰ تا ۱۰)
-        if (score < 10)
+        // ۲) حالا نمره ۲۰ یا کمتر است، رتبه‌ها را چک می‌کنیم
+        if (score >= 17)
         {
-            cout << "رتبه شما: F (مردود)" << endl;
+            cout << "Grade: A (Excellent)" << endl;
         }
         else
         {
-            // ۳) بررسی نمره ۱۰ تا ۱۲
-            if (score < 12)
+            // ۳) اگر به اینجا برسیم یعنی نمره قطعا کمتر از ۱۷ است
+            if (score >= 14)
             {
-                cout << "رتبه شما: D" << endl;
+                cout << "Grade: B (Good)" << endl;
             }
             else
             {
-                // ۴) بررسی نمره ۱۲ تا ۱۴
-                if (score < 14)
+                // ۴) اگر به اینجا برسیم یعنی نمره قطعا کمتر از ۱۴ است
+                if (score >= 12)
                 {
-                    cout << "رتبه شما: C" << endl;
+                    cout << "Grade: C (Average)" << endl;
                 }
                 else
                 {
-                    // ۵) بررسی نمره ۱۴ تا ۱۷
-                    if (score < 17)
+                    // ۵) اگر به اینجا برسیم یعنی نمره قطعا کمتر از ۱۲ است
+                    if (score >= 10)
                     {
-                        cout << "رتبه شما: B" << endl;
+                        cout << "Grade: D (Passing)" << endl;
                     }
                     else
                     {
-                        // ۶) بررسی نمره ۱۷ تا ۲۰
-                        if (score <= 20)
+                        // ۶) حالا باید بین نمره منفی و مردود تفکیک قائل شویم
+                        if (score >= 0)
                         {
-                            cout << "رتبه شما: A" << endl;
+                            cout << "Grade: F (Fail)" << endl;
                         }
                         else
                         {
-                            // ۷) نمرات بالای ۲۰
-                            cout << "نمره نامعتبر است (بیشتر از ۲۰)." << endl;
+                            // ۷) نمرات کمتر از صفر
+                            cout << "Invalid: Score cannot be less than 0." << endl;
                         }
                     }
                 }
