@@ -9,18 +9,19 @@ int main()
 {
     int number;
 
-    cout << "Enter a number: ";
-    cin >> number;
-
     while (true)
     {
-        int p = number * number;
-        cout << "The power is: " << p << endl;
-
         cout << "Enter a number: ";
         cin >> number;
+
+        if (number == 0)
+        {
+            break;
+        }
+
+        int p = number * number;
+        cout << "The power is: " << p << endl;
     }
 
-    cout << "--- Program finished. Goodbye! ---" << endl;
     return 0;
 }
