@@ -5,7 +5,7 @@ int main()
 {
 
     int j = 1;
-    while (j <= 10)
+    while (j <= 5)
     {
         cout << "*";
 
