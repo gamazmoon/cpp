@@ -52,7 +52,10 @@ int f()
 
 int main()
 {
-    int a = f();
+    int a;
+
+    a = f();
+    
     cout << a;
 
     return 0;
