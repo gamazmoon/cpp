@@ -47,31 +47,30 @@ using namespace std;
 
 int main()
 {
-
     int x[2][3] = {
-        {10, 11, 12},
-        {20, 21, 22}};
+        {8, 4, 12},
+        {10, 6, 9}};
 
-    int i, j;
+    int j, i;
 
-    int indI = 0;
     int indJ = 0;
+    int indI = 0;
     int max = x[0][0];
-    
-    for (i = 0; i < 2; i = i + 1)
+
+    for (j = 0; j < 2; j = j + 1)
     {
-        for (j = 0; j < 3; j = j + 1)
+        for (i = 0; i < 3; i = i + 1)
         {
-            if (x[i][j] > max)
+            if (x[j][i] > max)
             {
-                max = x[i][j];
-                indI = i;
+                max = x[j][i];
                 indJ = j;
+                indI = i;
             }
         }
     }
 
-    cout << "Max in (" << indI << "," << indJ << ")" << endl;
+    cout << "Max in (" << indJ << "," << indI << ")" << "\n";
     cout << "Max is:" << max;
 
     return 0;

@@ -66,13 +66,13 @@ int main()
     int *p = x;
 
     cout << p[0];
-    cout << endl;
+    cout << "\n";
 
     cout << p[1];
-    cout << endl;
+    cout << "\n";
 
     cout << p[2];
-    cout << endl;
+    cout << "\n";
 
     p[0]++;
 

@@ -49,15 +49,15 @@ int main()
         {8, 4, 12},
         {10, 6, 9}};
 
-    cout << x[0][0] << " ";
-    cout << x[0][1] << " ";
-    cout << x[0][2] << " ";
+    for (int j = 0; j < 2; j = j + 1)
+    {
+        for (int i = 0; i < 3; i = i + 1)
+        {
+            cout << x[j][i] << " ";
+        }
 
-    cout << "\n";
-
-    cout << x[1][0] << " ";
-    cout << x[1][1] << " ";
-    cout << x[1][2] << " ";
+        cout << "\n";
+    }
 
     return 0;
 }

@@ -74,16 +74,16 @@ int main()
 
     // cout << sizeof(int);
     cout << sizeof x;
-    cout << endl;
+    cout << "\n";
 
     cout << x;
-    cout << endl;
+    cout << "\n";
 
     cout << &x;
-    cout << endl;
+    cout << "\n";
 
     cout << &y;
-    cout << endl;
+    cout << "\n";
 
     return 0;
 }

@@ -49,7 +49,7 @@ int main()
     int *p1 = &x;
 
     cout << p1; // چاپ آدرس x
-    cout << endl;
+    cout << "\n";
 
     // اشاره‌گر به یک عدد اعشاری
     double d = 14.5;

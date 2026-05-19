@@ -75,13 +75,13 @@ int main()
     int *p = x;
 
     cout << *(p);
-    cout << endl;
+    cout << "\n";
 
     cout << *(p + 1);
-    cout << endl;
+    cout << "\n";
 
     cout << *(p + 2);
-    cout << endl;
+    cout << "\n";
 
     *(p + 1) = 100;
 

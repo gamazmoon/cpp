@@ -54,22 +54,22 @@ int main()
 {
 
     int x[2][3] = {
-        {10, 11, 12},
-        {20, 21, 22}};
+        {8, 4, 12},
+        {10, 6, 9}};
 
-    int i, j;
+    int j, i;
 
     int sum = 0;
-    for (i = 0; i < 2; i = i + 1)
+    for (j = 0; j < 2; j = j + 1)
     {
-        for (j = 0; j < 3; j = j + 1)
+        for (i = 0; i < 3; i = i + 1)
         {
-            sum = sum + x[i][j];
+            sum = sum + x[j][i];
         }
     }
 
-    cout << "Sum is:" << sum << endl;
-    cout << "Avg is:" << sum / (2 * 3) << endl;
+    cout << "Sum is:" << sum << "\n";
+    cout << "Avg is:" << sum / (2 * 3) << "\n";
 
     return 0;
 }

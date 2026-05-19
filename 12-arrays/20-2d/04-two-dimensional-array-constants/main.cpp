@@ -44,24 +44,25 @@ int main()
     const int NUM_COL = 3;
 
     int x[NUM_ROW][NUM_COL];
-    int i, j;
+    int j, i;
 
-    for (i = 0; i < NUM_ROW; i = i + 1)
+    for (j = 0; j < NUM_ROW; j = j + 1)
     {
-        for (j = 0; j < NUM_COL; j = j + 1)
+        for (i = 0; i < NUM_COL; i = i + 1)
         {
-            cout << "Please enter (" << i + 1 << "," << j + 1 << "): ";
-            cin >> x[i][j];
+            cout << "Please enter (" << j + 1 << "," << i + 1 << "): ";
+            cin >> x[j][i];
         }
     }
 
-    for (i = 0; i < NUM_ROW; i = i + 1)
+    for (j = 0; j < NUM_ROW; j = j + 1)
     {
-        for (j = 0; j < NUM_COL; j = j + 1)
+        for (i = 0; i < NUM_COL; i = i + 1)
         {
-            cout << x[i][j] << "\t";
+            cout << x[j][i] << "\t";
         }
-        cout << endl; // \n
+
+        cout << "\n";
     }
 
     return 0;

@@ -119,19 +119,19 @@ int main()
     {
         cout << x[i];
     }
-    cout << endl;
+    cout << "\n";
 
     for (int i = 0; i < 3; i = i + 1)
     {
         cout << p[i];
     }
-    cout << endl;
+    cout << "\n";
 
     for (int i = 0; i < 3; i = i + 1)
     {
         cout << *(p + i);
     }
-    cout << endl;
+    cout << "\n";
 
     for (int i = 0; i < 3; i = i + 1, p = p + 1)
     {

@@ -50,7 +50,7 @@ int main()
     int x[3] = {12, 2, 5};
 
     cout << x;
-    cout << endl;
+    cout << "\n";
     cout << &(x[0]);
 
     int *p = x;
