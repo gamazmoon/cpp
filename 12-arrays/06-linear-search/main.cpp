@@ -43,9 +43,9 @@ using namespace std;
 int main()
 {
     const int NUM = 4;
-    int x[NUM] = {5, 8, 2, 4};
+    int x[NUM] = {5, 8, 12, 4};
 
-    const int key = 8;
+    const int key = 12;
 
     int index = -1;
     for (int i = 0; i < NUM; i = i + 1)
