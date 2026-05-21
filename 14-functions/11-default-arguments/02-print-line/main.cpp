@@ -54,7 +54,9 @@ void line(char ch = '*', int length = 20)
     {
         cout << ch;
     }
-    cout << endl;
+    cout << "\n";
+
+    return;
 }
 
 int main()
