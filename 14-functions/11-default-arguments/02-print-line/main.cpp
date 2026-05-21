@@ -50,7 +50,7 @@ using namespace std;
 
 void line(char ch = '*', int length = 20)
 {
-    for (int i = 0; i < length; i++)
+    for (int i = 1; i <= length; i = i + 1)
     {
         cout << ch;
     }
