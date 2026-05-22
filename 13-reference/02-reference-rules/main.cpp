@@ -29,7 +29,7 @@ int main()
 
     int &r = x;
 
-    cout << r << endl;
+    cout << r << "endl";
 
     return 0;
 }

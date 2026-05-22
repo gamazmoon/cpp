@@ -32,8 +32,8 @@ int main()
 
     b = 20;
 
-    cout << "a = " << a << endl;
-    cout << "b = " << b << endl;
+    cout << "a = " << a << "\n";
+    cout << "b = " << b << "\n";
 
     return 0;
 }
