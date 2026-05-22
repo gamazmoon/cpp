@@ -26,11 +26,12 @@ using namespace std;
 
 int main()
 {
-    int x = 12;
+    int x;
+    x= 12;
 
     int y = x; // copy
 
-    y = 20;
+    y = 18;
 
     cout << x << "\n";
     cout << y << "\n";
