@@ -12,6 +12,8 @@ using namespace std;
 void f(int &x)
 {
     x = 10;
+    
+    return;
 }
 
 int main()
@@ -20,7 +22,7 @@ int main()
 
     f(a);
     
-    cout << a << endl; // خروجی: 10
+    cout << a << "\n"; // خروجی: 10
 
     return 0;
 }

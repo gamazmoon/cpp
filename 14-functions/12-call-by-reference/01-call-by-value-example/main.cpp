@@ -11,6 +11,8 @@ using namespace std;
 void f(int x)
 {
     x = 10;
+
+    return;
 }
 
 int main()
