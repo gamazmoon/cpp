@@ -52,18 +52,18 @@ int main()
     // آرایه‌ای از کالاها
     // هر عضو این آرایه، یک ساختار Product است
     Product items[N] = {
-        {101, "Rice", 30, 120},
-        {102, "Oil", 20, 250},
-        {103, "Sugar", 25, 110},
-        {104, "Tea", 15, 300},
-        {105, "Milk", 40, 90}};
+        {id : 101, name : "Rice", stock : 30, price : 120},
+        {id : 102, name : "Oil", stock : 20, price : 250},
+        {id : 103, name : "Sugar", stock : 25, price : 110},
+        {id : 104, name : "Tea", stock : 15, price : 300},
+        {id : 105, name : "Milk", stock : 40, price : 90}};
 
     // نمایش عنوان جدول
     cout << "=== Inventory ===\n";
     cout << left << setw(6) << "ID"
          << setw(15) << "Name"
          << setw(8) << "Stock"
-         << setw(8) << "Price" << endl;
+         << setw(8) << "Price" << "\n";
 
     // پیمایش آرایه و نمایش اطلاعات هر کالا
     for (int i = 0; i < N; i++)
@@ -71,7 +71,7 @@ int main()
         cout << left << setw(6) << items[i].id
              << setw(15) << items[i].name
              << setw(8) << items[i].stock
-             << setw(8) << items[i].price << endl;
+             << setw(8) << items[i].price << "\n";
     }
 
     return 0;
