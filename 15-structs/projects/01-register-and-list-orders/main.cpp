@@ -63,9 +63,7 @@
 
 using namespace std;
 
-const int MAX_PRODUCTS = 100;
-const int MAX_CUSTOMERS = 100;
-const int MAX_ORDERS = 100;
+const int MAX_ITEMS = 100;
 
 // -----------------------------------------------------------------------------
 
@@ -232,7 +230,7 @@ void showOrders(const Order orders[],
 
 void addCustomer(Customer customers[], int &count)
 {
-    if (count >= MAX_CUSTOMERS)
+    if (count >= MAX_ITEMS)
     {
         cout << "Customer list is full.\n";
         return;
@@ -257,7 +255,7 @@ void addCustomer(Customer customers[], int &count)
 
 void addProduct(Product items[], int &count)
 {
-    if (count >= MAX_PRODUCTS)
+    if (count >= MAX_ITEMS)
     {
         cout << "Product list is full.\n";
         return;
@@ -287,7 +285,7 @@ void registerOrder(Product items[], int productCount,
                    Customer customers[], int customerCount,
                    Order orders[], int &orderCount)
 {
-    if (orderCount >= MAX_ORDERS)
+    if (orderCount >= MAX_ITEMS)
     {
         cout << "Order list is full.\n";
         return;
@@ -339,7 +337,7 @@ void registerOrder(Product items[], int productCount,
 
 int main()
 {
-    Product products[MAX_PRODUCTS] =
+    Product products[MAX_ITEMS] =
     {
         {101,"Rice",30,120},
         {102,"Oil",20,250},
@@ -348,7 +346,7 @@ int main()
 
     int productCount = 3;
 
-    Customer customers[MAX_CUSTOMERS] =
+    Customer customers[MAX_ITEMS] =
     {
         {1,"Ali","09120000001"},
         {2,"Sara","09120000002"}
@@ -356,7 +354,7 @@ int main()
 
     int customerCount = 2;
 
-    Order orders[MAX_ORDERS];
+    Order orders[MAX_ITEMS];
     int orderCount = 0;
 
     int choice;
