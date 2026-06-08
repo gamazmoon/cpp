@@ -20,7 +20,7 @@ int main()
         }
 
         int p = number * number;
-        cout << "The power is: " << p << endl;
+        cout << "The power is: " << p << "\n";
     }
 
     return 0;

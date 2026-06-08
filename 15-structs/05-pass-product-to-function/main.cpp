@@ -92,7 +92,7 @@ int main()
     if (reduceStock(p, qty))
     {
         cout << "Order accepted.\n";
-        cout << "New stock: " << p.stock << endl;
+        cout << "New stock: " << p.stock << "\n";
     }
     else
     {

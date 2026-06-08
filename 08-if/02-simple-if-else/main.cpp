@@ -7,11 +7,11 @@ int main()
     // Test the condition
     if (number < 10)
     {
-        cout << "The number is less than 10." << endl;
+        cout << "The number is less than 10." << "\n";
     }
     else
     {
-        cout << "The number is either greater than or equal to 10." << endl;
+        cout << "The number is either greater than or equal to 10." << "\n";
     }
     
     // Modify value of number
@@ -19,11 +19,11 @@ int main()
     // Repeat the test to yield a different result
     if (number < 10)
     {
-        cout << "The number is less than 10." << endl;
+        cout << "The number is less than 10." << "\n";
     }
     else
     {
-        cout << "The number is either greater than or equal to 10." << endl;
+        cout << "The number is either greater than or equal to 10." << "\n";
     }
 
     return 0;

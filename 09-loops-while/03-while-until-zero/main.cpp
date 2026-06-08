@@ -15,12 +15,12 @@ int main()
     while (number != 0)
     {
         int p = number * number;
-        cout << "The power is: " << p << endl;
+        cout << "The power is: " << p << "\n";
 
         cout << "Enter a number: ";
         cin >> number;
     }
 
-    cout << "--- Program finished. Goodbye! ---" << endl;
+    cout << "--- Program finished. Goodbye! ---" << "\n";
     return 0;
 }

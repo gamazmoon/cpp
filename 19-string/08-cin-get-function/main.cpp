@@ -28,8 +28,8 @@ int main()
     // این تابع تا 50 کاراکتر را می‌خواند یا تا زمانی که کاربر Enter بزند.
     cin.get(fullName, 50);
 
-    cout << "Hello, " << fullName << "!" << endl;
-    cout << "Welcome to Gamazmoon programming course." << endl;
+    cout << "Hello, " << fullName << "!" << "\n";
+    cout << "Welcome to Gamazmoon programming course." << "\n";
 
     return 0;
 }

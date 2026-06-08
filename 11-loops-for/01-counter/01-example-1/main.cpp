@@ -6,7 +6,7 @@ int main()
     int counter;
     for (counter = 1; counter <= 5; counter++)
     {
-        cout << "Hello World!" << endl;
+        cout << "Hello World!" << "\n";
     }
 
     return 0;

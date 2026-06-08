@@ -88,14 +88,14 @@ int main()
     o.date.day = 29;
 
     // نمایش اطلاعات سفارش
-    cout << "Customer: " << o.customerName << endl;
-    cout << "Product ID: " << o.productId << endl;
-    cout << "Quantity: " << o.quantity << endl;
+    cout << "Customer: " << o.customerName << "\n";
+    cout << "Product ID: " << o.productId << "\n";
+    cout << "Quantity: " << o.quantity << "\n";
 
     // نمایش تاریخ سفارش
     cout << "Date: " << o.date.year << "/"
          << o.date.month << "/"
-         << o.date.day << endl;
+         << o.date.day << "\n";
 
     return 0;
 }

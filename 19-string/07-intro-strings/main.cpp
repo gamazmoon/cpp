@@ -25,7 +25,7 @@ int main()
     char name[] = "GamAzmoon";
 
     // نمایش مستقیم رشته (ساده‌ترین روش)
-    cout << "Full String: " << name << endl;
+    cout << "Full String: " << name << "\n";
 
     // نمایش رشته با پیمایش حلقه (برای درک ساختار آرایه‌ای)
     cout << "Character by character: ";
@@ -34,6 +34,6 @@ int main()
         cout << name[i] << " ";
     }
 
-    cout << endl;
+    cout << "\n";
     return 0;
 }

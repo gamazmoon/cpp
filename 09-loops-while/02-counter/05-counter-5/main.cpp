@@ -6,7 +6,7 @@ int main()
     int counter = 8;
     while (counter >= 2)
     {
-        cout << "H" << counter << endl;
+        cout << "H" << counter << "\n";
 
         counter -= 2;
     }

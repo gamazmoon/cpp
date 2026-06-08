@@ -43,8 +43,8 @@ int main()
 
     // ۳) نمایش اطلاعات هر دو شیء قبل از اعمال تغییرات
     cout << "--- Before changing p1 ---\n";
-    cout << "p1 (Rice) Price: " << p1.price << " | Stock: " << p1.stock << endl;
-    cout << "p2 (Rice) Price: " << p2.price << " | Stock: " << p2.stock << endl;
+    cout << "p1 (Rice) Price: " << p1.price << " | Stock: " << p1.stock << "\n";
+    cout << "p2 (Rice) Price: " << p2.price << " | Stock: " << p2.stock << "\n";
 
     // ۴) تغییر دادن مقادیر در شیء اول (p1)
     // قیمت کالا در شیء p1 گران‌تر می‌شود و موجودی آن تغییر می‌کند.

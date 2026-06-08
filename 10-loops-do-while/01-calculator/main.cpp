@@ -16,7 +16,7 @@ int main()
     } while (b == 0);
 
     z = a / b;
-    cout << "a/b is:" << z << endl;
+    cout << "a/b is:" << z << "\n";
 
     return 0;
 }

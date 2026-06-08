@@ -7,7 +7,7 @@ int main()
     while (counter <= 4)
     {
         int a = counter * 2;
-        cout << "H" << a << endl;
+        cout << "H" << a << "\n";
 
         counter++;
     }

@@ -10,7 +10,7 @@ int main()
     // ۱) ابتدا بررسی نمرات نامعتبر (فیلتر اولیه)
     if (score < 0 || score > 20)
     {
-        cout << "Invalid Score!" << endl;
+        cout << "Invalid Score!" << "\n";
     }
     else
     {
@@ -19,31 +19,31 @@ int main()
         // بازه نمره A
         if (score >= 17 && score <= 20)
         {
-            cout << "Grade: A" << endl;
+            cout << "Grade: A" << "\n";
         }
 
         // بازه نمره B
         if (score >= 14 && score < 17)
         {
-            cout << "Grade: B" << endl;
+            cout << "Grade: B" << "\n";
         }
 
         // بازه نمره C
         if (score >= 12 && score < 14)
         {
-            cout << "Grade: C" << endl;
+            cout << "Grade: C" << "\n";
         }
 
         // بازه نمره D
         if (score >= 10 && score < 12)
         {
-            cout << "Grade: D" << endl;
+            cout << "Grade: D" << "\n";
         }
 
         // بازه نمره F
         if (score >= 0 && score < 10)
         {
-            cout << "Grade: F" << endl;
+            cout << "Grade: F" << "\n";
         }
     }
 

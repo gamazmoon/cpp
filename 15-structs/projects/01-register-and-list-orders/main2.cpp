@@ -164,7 +164,7 @@ void showProducts(const Product items[], int count)
              << setw(8)  << items[i].id
              << setw(12) << items[i].name
              << setw(8)  << items[i].stock
-             << items[i].price << endl;
+             << items[i].price << "\n";
     }
 }
 
@@ -180,7 +180,7 @@ void showCustomers(const Customer customers[], int count)
         cout << left
              << setw(8)  << customers[i].id
              << setw(12) << customers[i].name
-             << customers[i].phone << endl;
+             << customers[i].phone << "\n";
     }
 }
 
@@ -207,7 +207,7 @@ void showOrders(const Order orders[], int orderCount, const Customer customers[]
         // *** فراخوانی متد داخلی ساختار تاریخ ***
         // به جای فرمت‌دهی دستی، متد print کپسوله‌شده در ساختار Date را صدا می‌زنیم
         orders[i].date.print(); 
-        cout << endl;
+        cout << "\n";
     }
 }
 

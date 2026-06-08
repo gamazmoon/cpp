@@ -6,7 +6,7 @@ int main()
     int counter = 11;
     while (counter <= 15)
     {
-        cout << "Hello World!" << endl;
+        cout << "Hello World!" << "\n";
 
         counter++;
     }

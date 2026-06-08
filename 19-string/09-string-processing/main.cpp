@@ -32,7 +32,7 @@ int main()
         }
     }
 
-    cout << "The letter 'a' appeared " << count << " times in your text." << endl;
+    cout << "The letter 'a' appeared " << count << " times in your text." << "\n";
 
     return 0;
 }

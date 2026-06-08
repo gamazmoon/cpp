@@ -8,7 +8,7 @@ int main()
     // If the value of number is less than 10
     if (number < 10)
     {
-        cout << "Hello World." << endl;
+        cout << "Hello World." << "\n";
     }
 
     // Change the value of a number to a value which is greater than 10

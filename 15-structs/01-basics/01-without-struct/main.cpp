@@ -41,10 +41,10 @@ int main()
 
     // نمایش اطلاعات کالا
     cout << "Product information:\n";
-    cout << "ID: " << id << endl;
-    cout << "Name: " << name << endl;
-    cout << "Stock: " << stock << endl;
-    cout << "Price: " << price << endl;
+    cout << "ID: " << id << "\n";
+    cout << "Name: " << name << "\n";
+    cout << "Stock: " << stock << "\n";
+    cout << "Price: " << price << "\n";
 
     return 0;
 }

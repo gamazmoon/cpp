@@ -164,7 +164,7 @@ void showProducts(const Product items[], int count)
              << setw(12) << items[i].name
              << setw(8) << items[i].stock
              << items[i].price
-             << endl;
+             << "\n";
     }
 }
 
@@ -185,7 +185,7 @@ void showCustomers(const Customer customers[], int count)
              << setw(8) << customers[i].id
              << setw(12) << customers[i].name
              << customers[i].phone
-             << endl;
+             << "\n";
     }
 }
 
@@ -222,7 +222,7 @@ void showOrders(const Order orders[],
              << orders[i].date.year << "/"
              << orders[i].date.month << "/"
              << orders[i].date.day
-             << endl;
+             << "\n";
     }
 }
 
