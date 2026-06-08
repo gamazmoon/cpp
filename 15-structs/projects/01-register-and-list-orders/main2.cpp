@@ -1,50 +1,33 @@
 // -----------------------------------------------------------------------------
-// برنامه نمونه: سیستم ساده مدیریت سفارش (نسخه توسعه‌یافته با متدهای داخلی)
+// برنامه نمونه: سیستم مدیریت سفارش (نسخه نهایی و مهندسی‌شده با رعایت اصل SoC)
 //
 // هدف آموزشی:
-//
-// این برنامه نمونه‌ای آموزشی است که مفاهیم کلیدی ساختارها را در یک پروژه واحد
-// ترکیب می‌کند. دانشجو با مطالعه این کد، تفاوت و کاربرد همزمان دو رویکرد زیر را می‌آموزد:
-//
-// 1) متدهای داخلی (Member Functions): تعریف تابع درون struct برای عملیاتی که
-//    مستقیماً با داده‌های خودِ آن ساختار سر و کار دارند (مانند کاهش موجودی کالا).
-//
-// 2) توابع عمومی (ارسال ساختار به تابع): تعریف تابع خارج از struct برای مدیریت
-//    تعاملات بین چند ساختار مختلف و آرایه‌ها (مانند ثبت سفارش یا جست‌وجو).
-//
-// مفاهیم کلیدی که دانشجو در این پروژه یاد می‌گیرد:
-//
-// 1) استفاده از struct برای تعریف موجودیت‌ها (Product, Customer, Order, Date)
-// 2) تعریف و فراخوانی متدها درون یک struct
-// 3) مفهوم ترکیب ساختارها یا ساختارهای تودرتو (Nested Structs - استفاده از Date در Order)
-// 4) نگهداری مجموعه‌ای از ساختارها با استفاده از آرایه‌های ثابت
-// 5) جست‌وجو در آرایه‌ای از ساختارها با استفاده از شناسه (id)
-// 6) کپسوله‌سازی منطق کاهش موجودی کالا (reduceStock) درون خودِ ساختار کالا
-// 7) استفاده از یک منوی تعاملی ساده برای اجرای عملیات مختلف
+// این پروژه الگو و ساختار یک کد استاندارد و تمیز (Clean Code) را با ترکیب مفاهیم زیر به دانشجو یاد می‌دهد:
+// 
+// 1) اصل تفکیک وظایف (Separation of Concerns): جداسازی کامل لایه دریافت ورودی (UI) 
+//    از لایه منطق کلان برنامه (Business Logic).
+// 2) متدهای داخلی (Member Functions): هر شیء با داشتن متد readFromConsole خودش مسئول 
+//    دریافت و پر کردن داده‌های خودش است و فضای تابع main یا لایه پردازش را شلوغ نمی‌کند.
+// 3) توابع عمومی: مدیریت هماهنگی، اعتبارسنجی و تعاملات کلان بین آرایه‌های مختلف ساختارها.
 //
 // -----------------------------------------------------------------------------
 // معماری داده‌ها و توابع برنامه:
 //
 // ساختارهای داده (Structs):
-//   - Date     ----> دارای متد داخلی print() برای نمایش تاریخ
-//   - Product  ----> دارای متد داخلی reduceStock() برای بررسی و کسر موجودی انبار
-//   - Customer ----> ساختار ساده برای ذخیره اطلاعات مشتری
-//   - Order    ----> ترکیب شناسه مشتری، کالا و ساختار Date
+//   - Date     ----> دارای متد print() برای نمایش و readFromConsole() برای دریافت تاریخ
+//   - Product  ----> دارای متد reduceStock() برای کسر موجودی و readFromConsole() برای دریافت کالا
+//   - Customer ----> دارای متد readFromConsole() برای دریافت اطلاعات مشتری
+//   - Order    ----> دارای متد readFromConsole() برای دریافت اطلاعات سفارش (ترکیب با متد Date)
 //
-// توابع عمومی (ارسال آرایه ساختارها):
-//   - showProducts()       / showCustomers()       ----> نمایش لیست‌ها
-//   - findProductIndexById() / findCustomerIndexById() ----> جست‌وجو در آرایه‌ها
-//   - addProduct()         / addCustomer()         ----> افزودن با پاس دادن مرجع (Reference)
-//   - registerOrder()                              ----> ترکیب آرایه‌ها و فراخوانی متد کالا
-//   - showOrders()                                 ----> نمایش سفارشات و فراخوانی متد تاریخ
+// توابع عمومی (لایه منطق و پردازش آرایه‌ها):
+//   - addProduct()   / addCustomer()   ----> دریافت شیء کاملاً پر شده و افزودن به آرایه مرجع
+//   - registerOrder()                  ----> دریافت سفارش آماده، اعتبارسنجی اصالت و کسر موجودی انبار
+//   - findProductIndexById() / findCustomerIndexById() ----> جست‌وجو و اعتبارسنجی فیلدها
+//   - showProducts() / showCustomers() / showOrders()  ----> نمایش لیست‌های خروجی
 //
 // -----------------------------------------------------------------------------
 // محدودیت برنامه (جهت حفظ سادگی آموزشی):
-//
-// - از vector استفاده نشده است.
-// - از pointer استفاده نشده است.
-// - از آرایه‌های ثابت استفاده شده است تا تمرکز کاملاً روی Struct و Method باشد.
-//
+// - از vector و pointer استفاده نشده است تا تمرکز کاملاً روی Struct، Method و معماری SoC باشد.
 // -----------------------------------------------------------------------------
 
 #include <iostream>
@@ -53,30 +36,35 @@
 
 using namespace std;
 
-// حداکثر ظرفیت آرایه‌ها برای سادگی کار و عدم استفاده از Vector
+// حداکثر ظرفیت آرایه‌ها برای سادگی کار
 const int MAX_ITEMS = 100;
 
-// -----------------------------------------------------------------------------
-// ۱) ساختار تاریخ (Date) - دارای متد داخلی
-// -----------------------------------------------------------------------------
+// =============================================================================
+// بخش اول: تعریف ساختارها (Structs) به همراه متدهای داخلی هرکدام
+// =============================================================================
+
+// ۱) ساختار تاریخ (Date) - دارای متد داخلی برای چاپ و دریافت
 struct Date
 {
     int year;
     int month;
     int day;
 
-    // *** این یک «متد» یا تابع عضو (Member Function) است ***
-    // چون این تابع درون خود ساختار تعریف شده، به طور مستقیم به متغیرهای year، month و day
-    // همان شیء دسترسی دارد و نیازی نیست ساختار را به عنوان ورودی به آن پاس بدهیم.
+    // متد داخلی برای چاپ تاریخ
     void print() const 
     {
         cout << year << "/" << month << "/" << day;
     }
+
+    // متد داخلی برای دریافت تاریخ از کیبورد (کاملاً کپسوله‌شده)
+    void readFromConsole()
+    {
+        cin >> year >> month >> day;
+    }
 };
 
 // -----------------------------------------------------------------------------
-// ۲) ساختار کالا (Product) - دارای متد داخلی برای مدیریت موجودی
-// -----------------------------------------------------------------------------
+// ۲) ساختار کالا (Product) - دارای متد داخلی برای مدیریت موجودی و دریافت ورودی
 struct Product
 {
     int id;
@@ -84,14 +72,19 @@ struct Product
     int stock;
     int price;
 
-    // *** این یک «متد» است ***
-    // وظیفه این متد، بررسی و کاهش موجودی همین کالای خاص است.
-    // به نحوه استفاده از کلمه کلیدی یا دسترسی مستقیم به stock دقت کنید.
+    // متد دریافت اطلاعات کالا از کاربر (تفکیک لایه ورودی - UI)
+    void readFromConsole()
+    {
+        cout << "Product id: ";   cin >> id;
+        cout << "Product name: "; cin >> name;
+        cout << "Stock: ";        cin >> stock;
+        cout << "Price: ";        cin >> price;
+    }
+
+    // متد بررسی و کاهش موجودی کالا (منطق داخلی کلا)
     bool reduceStock(int qty)
     {
         if (qty <= 0) return false;
-
-        // اگر موجودی انبار انبار از تعداد درخواستی بیشتر یا مساوی بود
         if (stock >= qty)
         {
             stock -= qty; // موجودی همین کالا کم می‌شود
@@ -102,52 +95,65 @@ struct Product
 };
 
 // -----------------------------------------------------------------------------
-// ۳) ساختار مشتری (Customer) - یک ساختار ساده بدون متد
-// -----------------------------------------------------------------------------
+// ۳) ساختار مشتری (Customer) - دارای متد داخلی دریافت اطلاعات
 struct Customer
 {
     int id;
     string name;
     string phone;
+
+    // متد دریافت اطلاعات مشتری از کاربر
+    void readFromConsole()
+    {
+        cout << "Customer id: ";   cin >> id;
+        cout << "Customer name: "; cin >> name;
+        cout << "Phone: ";         cin >> phone;
+    }
 };
 
 // -----------------------------------------------------------------------------
 // ۴) ساختار سفارش (Order) - نمونه‌ای از ترکیب ساختارها (Nested Struct)
-// -----------------------------------------------------------------------------
 struct Order
 {
     int customerId;
     int productId;
     int quantity;
     Date date; // ساختار Date به عنوان یک عضو درون ساختار Order استفاده شده است
+
+    // متد دریافت اطلاعات سفارش از کاربر
+    void readFromConsole()
+    {
+        cout << "Customer id: ";   cin >> customerId;
+        cout << "Product id: ";    cin >> productId;
+        cout << "Quantity: ";      cin >> quantity;
+        cout << "Date (yyyy mm dd): "; 
+        date.readFromConsole(); // فراخوانی متد داخلی ساختار تاریخ برای پر کردن فیلد date
+    }
 };
 
 // =============================================================================
-// توابع عمومی (توابع خارج از ساختار)
-// این توابع نمونه بارز «ارسال ساختار یا آرایه‌ای از ساختارها به تابع» هستند.
+// بخش دوم: توابع عمومی (لایه منطق برنامه و مدیریت کلان آرایه‌ها)
 // =============================================================================
 
-// این تابع آرایه‌ای از کالاها را می‌گیرد و بر اساس ID، اندیس آن کالا را پیدا می‌کند
+// جست‌وجوی کالا بر اساس ID و برگرداندن اندیس آن
 int findProductIndexById(const Product items[], int count, int id)
 {
     for (int i = 0; i < count; i++)
     {
-        if (items[i].id == id)
-            return i; // اندیس کالا پیدا شد
+        if (items[i].id == id) return i;
     }
-    return -1; // کالا یافت نشد
+    return -1;
 }
 
 // -----------------------------------------------------------------------------
-// این تابع آرایه‌ای از مشتریان را می‌گیرد و بر اساس ID، اندیس مشتری را پیدا می‌کند
+// جست‌وجوی مشتری بر اساس ID و برگرداندن اندیس آن
 int findCustomerIndexById(const Customer customers[], int count, int id)
 {
     for (int i = 0; i < count; i++)
     {
-        if (customers[i].id == id)
-            return i; // اندیس مشتری پیدا شد
+        if (customers[i].id == id) return i;
     }
-    return -1; // مشتری یافت نشد
+    return -1;
 }
 
 // -----------------------------------------------------------------------------
@@ -159,12 +165,8 @@ void showProducts(const Product items[], int count)
 
     for (int i = 0; i < count; i++)
     {
-        // دسترسی به اعضای هر ساختار با استفاده از اپراتور نقطه (.)
-        cout << left
-             << setw(8)  << items[i].id
-             << setw(12) << items[i].name
-             << setw(8)  << items[i].stock
-             << items[i].price << "\n";
+        cout << left << setw(8) << items[i].id << setw(12) << items[i].name 
+             << setw(8) << items[i].stock << items[i].price << "\n";
     }
 }
 
@@ -177,16 +179,13 @@ void showCustomers(const Customer customers[], int count)
 
     for (int i = 0; i < count; i++)
     {
-        cout << left
-             << setw(8)  << customers[i].id
-             << setw(12) << customers[i].name
+        cout << left << setw(8) << customers[i].id << setw(12) << customers[i].name 
              << customers[i].phone << "\n";
     }
 }
 
 // -----------------------------------------------------------------------------
 // نمایش سفارشات ثبت شده
-// این تابع آرایه‌های مختلفی از ساختارهای متفاوت را به عنوان ورودی دریافت می‌کند
 void showOrders(const Order orders[], int orderCount, const Customer customers[], int customerCount)
 {
     cout << "\n=== Orders ===\n";
@@ -194,139 +193,105 @@ void showOrders(const Order orders[], int orderCount, const Customer customers[]
 
     for (int i = 0; i < orderCount; i++)
     {
-        // پیدا کردن نام مشتری بر اساس شناسه مشتری موجود در سفارش
         int c = findCustomerIndexById(customers, customerCount, orders[i].customerId);
         string cname = "Unknown";
         if (c != -1) cname = customers[c].name;
 
-        cout << left
-             << setw(12) << cname
-             << setw(10) << orders[i].productId
-             << setw(8)  << orders[i].quantity;
-        
-        // *** فراخوانی متد داخلی ساختار تاریخ ***
-        // به جای فرمت‌دهی دستی، متد print کپسوله‌شده در ساختار Date را صدا می‌زنیم
-        orders[i].date.print(); 
+        cout << left << setw(12) << cname << setw(10) << orders[i].productId << setw(8) << orders[i].quantity;
+        orders[i].date.print(); // فراخوانی متد داخلی ساختار تاریخ
         cout << "\n";
     }
 }
 
 // -----------------------------------------------------------------------------
-// اضافه کردن کالا به آرایه (ارسال تعداد با ارجاع یا Reference جهت تغییر متغیر اصلی)
-void addProduct(Product items[], int &count)
+// اضافه کردن کالا: فقط یک شیءِ معتبر و پر شده را گرفته و به آرایه اضافه می‌کند
+void addProduct(Product items[], int &count, const Product &p)
 {
     if (count >= MAX_ITEMS)
     {
         cout << "Product list is full.\n";
         return;
     }
-
-    Product p; // ایجاد یک متغیر موقت از نوع ساختار کالا
-    cout << "Product id: ";   cin >> p.id;
-    cout << "Product name: "; cin >> p.name;
-    cout << "Stock: ";        cin >> p.stock;
-    cout << "Price: ";        cin >> p.price;
-
-    items[count] = p; // کپی کردن ساختار پر شده در آرایه اصلی
-    count++;          // افزایش تعداد کالاهای موجود در سیستم
+    items[count] = p; // کپی شیء آماده در آرایه
+    count++;
+    cout << "Product added successfully.\n";
 }
 
 // -----------------------------------------------------------------------------
-// اضافه کردن مشتری جدید به آرایه مشتریان
-void addCustomer(Customer customers[], int &count)
+// اضافه کردن مشتری: دریافت شیءِ پر شده و اضافه کردن آن به آرایه مشتریان
+void addCustomer(Customer customers[], int &count, const Customer &c)
 {
     if (count >= MAX_ITEMS)
     {
         cout << "Customer list is full.\n";
         return;
     }
-
-    Customer c;
-    cout << "Customer id: ";   cin >> c.id;
-    cout << "Customer name: "; cin >> c.name;
-    cout << "Phone: ";         cin >> c.phone;
-
     customers[count] = c;
     count++;
+    cout << "Customer added successfully.\n";
 }
 
 // -----------------------------------------------------------------------------
-// ثبت یک سفارش جدید و کسر موجودی انبار
-void registerOrder(Product items[], int productCount,
+// ثبت یک سفارش جدید (منطق پردازش و اعتبارسنجی طبق اصل SoC)
+// این تابع هیچ ورودی مستقیم یا cin از کاربر ندارد، فقط صحتِ سفارش را بررسی می‌کند.
+bool registerOrder(Product items[], int productCount,
                    Customer customers[], int customerCount,
-                   Order orders[], int &orderCount)
+                   Order orders[], int &orderCount, 
+                   const Order &newOrder)
 {
     if (orderCount >= MAX_ITEMS)
     {
         cout << "Order list is full.\n";
-        return;
+        return false;
     }
 
-    Order o;
-    cout << "Customer id: ";   cin >> o.customerId;
-    cout << "Product id: ";    cin >> o.productId;
-    cout << "Quantity: ";      cin >> o.quantity;
-    cout << "Date (yyyy mm dd): "; cin >> o.date.year >> o.date.month >> o.date.day;
-
-    // ۱. بررسی اصالت مشتری (آیا این مشتری اصلاً وجود دارد؟)
-    int cIdx = findCustomerIndexById(customers, customerCount, o.customerId);
+    // ۱. بررسی اصالت مشتری (اعتبارسنجی لایه بیزینس)
+    int cIdx = findCustomerIndexById(customers, customerCount, newOrder.customerId);
     if (cIdx == -1)
     {
         cout << "Customer not found.\n";
-        return;
+        return false;
     }
 
-    // ۲. بررسی اصالت کالا (آیا این کالا اصلاً در انبار هست؟)
-    int pIdx = findProductIndexById(items, productCount, o.productId);
+    // ۲. بررسی اصالت کالا
+    int pIdx = findProductIndexById(items, productCount, newOrder.productId);
     if (pIdx == -1)
     {
         cout << "Product not found.\n";
-        return;
+        return false;
     }
 
-    // ۳. *** فراخوانی متد کالا برای کاهش موجودی انبار ***
-    // به این نحوه‌ی نگارش دقت کنید؛ ما شیءِ کالا را به تابع خارجی نفرستادیم، 
-    // بلکه به خودِ آن کالا (items[pIdx]) دستور دادیم که با متد داخلی‌اش، موجودی خود را کم کند.
-    if (!items[pIdx].reduceStock(o.quantity))
+    // ۳. فراخوانی متد کالا برای کاهش موجودی انبار
+    if (!items[pIdx].reduceStock(newOrder.quantity))
     {
         cout << "Not enough stock.\n";
-        return;
+        return false;
     }
 
-    // ۴. ثبت نهایی سفارش در صورت موفقیت‌آمیز بودن مراحل قبل
-    orders[orderCount] = o;
+    // ۴. ثبت سفارش در صورت عبور از تمام فیلترها
+    orders[orderCount] = newOrder;
     orderCount++;
-
-    cout << "Order registered successfully.\n";
+    return true; 
 }
 
-// -----------------------------------------------------------------------------
+// =============================================================================
+// بخش سوم: تابع اصلی (کنترل‌کننده جریان منو و برنامه)
+// =============================================================================
 int main()
 {
-    // مقداردهی اولیه به آرایه محصولات (هاردکد برای راحتی تست تست برنامه)
-    Product products[MAX_ITEMS] =
-    {
-        {101,"Rice",30,120},
-        {102,"Oil",20,250},
-        {103,"Sugar",25,110}
-    };
+    // هاردکد کردن داده‌های اولیه پیش‌فرض سیستم برای راحتی تست تست برنامه
+    Product products[MAX_ITEMS] = { {101,"Rice",30,120}, {102,"Oil",20,250}, {103,"Sugar",25,110} };
     int productCount = 3;
 
-    // مقداردهی اولیه به آرایه مشتریان
-    Customer customers[MAX_ITEMS] =
-    {
-        {1,"Ali","09120000001"},
-        {2,"Sara","09120000002"}
-    };
+    Customer customers[MAX_ITEMS] = { {1,"Ali","09120000001"}, {2,"Sara","09120000002"} };
     int customerCount = 2;
 
-    // ایجاد آرایه سفارشات (در ابتدا خالی است)
     Order orders[MAX_ITEMS];
     int orderCount = 0;
 
     int choice;
 
-    // منوی اصلی برنامه برای تعامل کاربر
+    // منوی اصلی برنامه (تابع main فقط جریان را کنترل می‌کند و درگیر جزییات cin نیست)
     do
     {
         cout << "\n===== MENU =====\n";
@@ -342,12 +307,39 @@ int main()
 
         switch (choice)
         {
-            case 1: showProducts(products, productCount); break;
-            case 2: showCustomers(customers, customerCount); break;
-            case 3: addProduct(products, productCount); break;
-            case 4: addCustomer(customers, customerCount); break;
-            case 5: registerOrder(products, productCount, customers, customerCount, orders, orderCount); break;
-            case 6: showOrders(orders, orderCount, customers, customerCount); break;
+            case 1: 
+                showProducts(products, productCount); 
+                break;
+            case 2: 
+                showCustomers(customers, customerCount); 
+                break;
+            case 3: 
+                {
+                    Product p;
+                    p.readFromConsole(); // لایه ورود اطلاعات (UI) کاملاً کپسوله و مستقل
+                    addProduct(products, productCount, p); // لایه پردازش و ذخیره داده
+                    break;
+                }
+            case 4: 
+                {
+                    Customer c;
+                    c.readFromConsole(); // هر شیء خودش داده‌هایش را دریافت میکند
+                    addCustomer(customers, customerCount, c);
+                    break;
+                }
+            case 5: 
+                {
+                    Order o;
+                    o.readFromConsole(); // ساخت شیءِ سفارش مستقل از منطقِ ثبت آن
+                    if (registerOrder(products, productCount, customers, customerCount, orders, orderCount, o))
+                    {
+                        cout << "Order registered successfully.\n";
+                    }
+                    break;
+                }
+            case 6: 
+                showOrders(orders, orderCount, customers, customerCount); 
+                break;
         }
     } while (choice != 0);
 
