@@ -16,7 +16,6 @@
 #include <string>
 using namespace std;
 
-// تعریف ساختار کالا
 struct Product
 {
     int id;
@@ -25,17 +24,15 @@ struct Product
     int price;
 };
 
-// -----------------------------------------------------------------------------
 // ۱) تابع نمایش اطلاعات کالا (ارسال به صورت کپی / Pass by Value)
 // این تابع فقط برای چاپ است و تغییری در شیء اصلی ایجاد نمی‌کند.
 // -----------------------------------------------------------------------------
 void printProduct(Product p)
 {
-    cout << "ID: " << p.id << " | Name: " << p.name 
+    cout << "ID: " << p.id << " | Name: " << p.name
          << " | Stock: " << p.stock << " | Price: " << p.price << "\n";
 }
 
-// -----------------------------------------------------------------------------
 // ۲) تابع کاهش موجودی کالا (ارسال به صورت مرجع / Pass by Reference)
 // -----------------------------------------------------------------------------
 bool reduceStock(Product &p, int qty)
@@ -45,7 +42,7 @@ bool reduceStock(Product &p, int qty)
 
     if (p.stock >= qty)
     {
-        p.stock -= qty; // تغییر مستقیم روی شیء اصلی در حافظه
+        p.stock = p.stock - qty; // تغییر مستقیم روی شیء اصلی در حافظه
         return true;
     }
     return false;
@@ -53,28 +50,11 @@ bool reduceStock(Product &p, int qty)
 
 int main()
 {
-    // تعریف یک کالا
     Product myProduct = {101, "Rice", 30, 120};
 
-    cout << "--- Initial Product Info ---\n";
-    // فراخوانی تابع چاپ (ارسال با کپی)
     printProduct(myProduct);
 
-    int qty;
-    cout << "\nEnter quantity to order: ";
-    cin >> qty;
-
-    // فراخوانی تابع کاهش موجودی (ارسال با ارجاع)
-    if (reduceStock(myProduct, qty))
-    {
-        cout << "Order accepted.\n";
-        cout << "--- Updated Product Info ---\n";
-        printProduct(myProduct);
-    }
-    else
-    {
-        cout << "Order rejected. Not enough stock.\n";
-    }
+    reduceStock(myProduct, 5);
 
     return 0;
 }
