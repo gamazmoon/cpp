@@ -3,10 +3,10 @@
 //
 // هدف آموزشی:
 // این پروژه الگو و ساختار یک کد استاندارد و تمیز (Clean Code) را با ترکیب مفاهیم زیر به دانشجو یاد می‌دهد:
-// 
-// 1) اصل تفکیک وظایف (Separation of Concerns): جداسازی کامل لایه دریافت ورودی (UI) 
+//
+// 1) اصل تفکیک وظایف (Separation of Concerns): جداسازی کامل لایه دریافت ورودی (UI)
 //    از لایه منطق کلان برنامه (Business Logic).
-// 2) متدهای داخلی (Member Functions): هر شیء با داشتن متد readFromConsole خودش مسئول 
+// 2) متدهای داخلی (Member Functions): هر شیء با داشتن متد readFromConsole خودش مسئول
 //    دریافت و پر کردن داده‌های خودش است و فضای تابع main یا لایه پردازش را شلوغ نمی‌کند.
 // 3) توابع عمومی: مدیریت هماهنگی، اعتبارسنجی و تعاملات کلان بین آرایه‌های مختلف ساختارها.
 //
@@ -51,12 +51,12 @@ struct Date
     int day;
 
     // متد داخلی برای چاپ تاریخ
-    void print() const 
+    void print() const
     {
         cout << year << "/" << month << "/" << day;
     }
 
-    // متد داخلی برای دریافت تاریخ از کیبورد (کاملاً کپسوله‌شده)
+    // متد داخلی برای دریافت تاریخ از کیبورد
     void readFromConsole()
     {
         cin >> year >> month >> day;
@@ -75,22 +75,31 @@ struct Product
     // متد دریافت اطلاعات کالا از کاربر (تفکیک لایه ورودی - UI)
     void readFromConsole()
     {
-        cout << "Product id: ";   cin >> id;
-        cout << "Product name: "; cin >> name;
-        cout << "Stock: ";        cin >> stock;
-        cout << "Price: ";        cin >> price;
+        cout << "Product id: ";
+        cin >> id;
+        cout << "Product name: ";
+        cin >> name;
+        cout << "Stock: ";
+        cin >> stock;
+        cout << "Price: ";
+        cin >> price;
     }
 
     // متد بررسی و کاهش موجودی کالا (منطق داخلی کلا)
     bool reduceStock(int qty)
     {
-        if (qty <= 0) return false;
-        if (stock >= qty)
+        if (qty <= 0)
         {
-            stock -= qty; // موجودی همین کالا کم می‌شود
-            return true;  // عملیات موفقیت‌آمیز بود
+            return false;
         }
-        return false;     // موجودی کافی نیست
+
+        if (stock < qty)
+        {
+            return false;
+        }
+
+        stock = stock - qty;
+        return true;
     }
 };
 
@@ -105,9 +114,12 @@ struct Customer
     // متد دریافت اطلاعات مشتری از کاربر
     void readFromConsole()
     {
-        cout << "Customer id: ";   cin >> id;
-        cout << "Customer name: "; cin >> name;
-        cout << "Phone: ";         cin >> phone;
+        cout << "Customer id: ";
+        cin >> id;
+        cout << "Customer name: ";
+        cin >> name;
+        cout << "Phone: ";
+        cin >> phone;
     }
 };
 
@@ -123,10 +135,13 @@ struct Order
     // متد دریافت اطلاعات سفارش از کاربر
     void readFromConsole()
     {
-        cout << "Customer id: ";   cin >> customerId;
-        cout << "Product id: ";    cin >> productId;
-        cout << "Quantity: ";      cin >> quantity;
-        cout << "Date (yyyy mm dd): "; 
+        cout << "Customer id: ";
+        cin >> customerId;
+        cout << "Product id: ";
+        cin >> productId;
+        cout << "Quantity: ";
+        cin >> quantity;
+        cout << "Date (yyyy mm dd): ";
         date.readFromConsole(); // فراخوانی متد داخلی ساختار تاریخ برای پر کردن فیلد date
     }
 };
@@ -138,10 +153,14 @@ struct Order
 // جست‌وجوی کالا بر اساس ID و برگرداندن اندیس آن
 int findProductIndexById(const Product items[], int count, int id)
 {
-    for (int i = 0; i < count; i++)
+    for (int i = 0; i < count; i = i + 1)
     {
-        if (items[i].id == id) return i;
+        if (items[i].id == id)
+        {
+            return i;
+        }
     }
+
     return -1;
 }
 
@@ -149,10 +168,14 @@ int findProductIndexById(const Product items[], int count, int id)
 // جست‌وجوی مشتری بر اساس ID و برگرداندن اندیس آن
 int findCustomerIndexById(const Customer customers[], int count, int id)
 {
-    for (int i = 0; i < count; i++)
+    for (int i = 0; i < count; i = i + 1)
     {
-        if (customers[i].id == id) return i;
+        if (customers[i].id == id)
+        {
+            return i;
+        }
     }
+    
     return -1;
 }
 
@@ -163,9 +186,9 @@ void showProducts(const Product items[], int count)
     cout << "\n=== Product List ===\n";
     cout << left << setw(8) << "ID" << setw(12) << "Name" << setw(8) << "Stock" << "Price\n";
 
-    for (int i = 0; i < count; i++)
+    for (int i = 0; i < count; i = i + 1)
     {
-        cout << left << setw(8) << items[i].id << setw(12) << items[i].name 
+        cout << left << setw(8) << items[i].id << setw(12) << items[i].name
              << setw(8) << items[i].stock << items[i].price << "\n";
     }
 }
@@ -177,9 +200,9 @@ void showCustomers(const Customer customers[], int count)
     cout << "\n=== Customer List ===\n";
     cout << left << setw(8) << "ID" << setw(12) << "Name" << "Phone\n";
 
-    for (int i = 0; i < count; i++)
+    for (int i = 0; i < count; i = i + 1)
     {
-        cout << left << setw(8) << customers[i].id << setw(12) << customers[i].name 
+        cout << left << setw(8) << customers[i].id << setw(12) << customers[i].name
              << customers[i].phone << "\n";
     }
 }
@@ -191,11 +214,14 @@ void showOrders(const Order orders[], int orderCount, const Customer customers[]
     cout << "\n=== Orders ===\n";
     cout << left << setw(12) << "Customer" << setw(10) << "Product" << setw(8) << "Qty" << "Date\n";
 
-    for (int i = 0; i < orderCount; i++)
+    for (int i = 0; i < orderCount; i = i + 1)
     {
         int c = findCustomerIndexById(customers, customerCount, orders[i].customerId);
         string cname = "Unknown";
-        if (c != -1) cname = customers[c].name;
+        if (c != -1)
+        {
+            cname = customers[c].name;
+        }
 
         cout << left << setw(12) << cname << setw(10) << orders[i].productId << setw(8) << orders[i].quantity;
         orders[i].date.print(); // فراخوانی متد داخلی ساختار تاریخ
@@ -212,6 +238,7 @@ void addProduct(Product items[], int &count, const Product &p)
         cout << "Product list is full.\n";
         return;
     }
+
     items[count] = p; // کپی شیء آماده در آرایه
     count++;
     cout << "Product added successfully.\n";
@@ -226,17 +253,18 @@ void addCustomer(Customer customers[], int &count, const Customer &c)
         cout << "Customer list is full.\n";
         return;
     }
+
     customers[count] = c;
     count++;
     cout << "Customer added successfully.\n";
 }
 
 // -----------------------------------------------------------------------------
-// ثبت یک سفارش جدید (منطق پردازش و اعتبارسنجی طبق اصل SoC)
+// ثبت یک سفارش جدید
 // این تابع هیچ ورودی مستقیم یا cin از کاربر ندارد، فقط صحتِ سفارش را بررسی می‌کند.
 bool registerOrder(Product items[], int productCount,
                    Customer customers[], int customerCount,
-                   Order orders[], int &orderCount, 
+                   Order orders[], int &orderCount,
                    const Order &newOrder)
 {
     if (orderCount >= MAX_ITEMS)
@@ -271,7 +299,7 @@ bool registerOrder(Product items[], int productCount,
     // ۴. ثبت سفارش در صورت عبور از تمام فیلترها
     orders[orderCount] = newOrder;
     orderCount++;
-    return true; 
+    return true;
 }
 
 // =============================================================================
@@ -280,10 +308,10 @@ bool registerOrder(Product items[], int productCount,
 int main()
 {
     // هاردکد کردن داده‌های اولیه پیش‌فرض سیستم برای راحتی تست تست برنامه
-    Product products[MAX_ITEMS] = { {101,"Rice",30,120}, {102,"Oil",20,250}, {103,"Sugar",25,110} };
+    Product products[MAX_ITEMS] = {{101, "Rice", 30, 120}, {102, "Oil", 20, 250}, {103, "Sugar", 25, 110}};
     int productCount = 3;
 
-    Customer customers[MAX_ITEMS] = { {1,"Ali","09120000001"}, {2,"Sara","09120000002"} };
+    Customer customers[MAX_ITEMS] = {{1, "Ali", "09120000001"}, {2, "Sara", "09120000002"}};
     int customerCount = 2;
 
     Order orders[MAX_ITEMS];
@@ -307,39 +335,39 @@ int main()
 
         switch (choice)
         {
-            case 1: 
-                showProducts(products, productCount); 
-                break;
-            case 2: 
-                showCustomers(customers, customerCount); 
-                break;
-            case 3: 
-                {
-                    Product p;
-                    p.readFromConsole(); // لایه ورود اطلاعات (UI) کاملاً کپسوله و مستقل
-                    addProduct(products, productCount, p); // لایه پردازش و ذخیره داده
-                    break;
-                }
-            case 4: 
-                {
-                    Customer c;
-                    c.readFromConsole(); // هر شیء خودش داده‌هایش را دریافت میکند
-                    addCustomer(customers, customerCount, c);
-                    break;
-                }
-            case 5: 
-                {
-                    Order o;
-                    o.readFromConsole(); // ساخت شیءِ سفارش مستقل از منطقِ ثبت آن
-                    if (registerOrder(products, productCount, customers, customerCount, orders, orderCount, o))
-                    {
-                        cout << "Order registered successfully.\n";
-                    }
-                    break;
-                }
-            case 6: 
-                showOrders(orders, orderCount, customers, customerCount); 
-                break;
+        case 1:
+            showProducts(products, productCount);
+            break;
+        case 2:
+            showCustomers(customers, customerCount);
+            break;
+        case 3:
+        {
+            Product p;
+            p.readFromConsole();                   // لایه ورود اطلاعات (UI) کاملاً کپسوله و مستقل
+            addProduct(products, productCount, p); // لایه پردازش و ذخیره داده
+            break;
+        }
+        case 4:
+        {
+            Customer c;
+            c.readFromConsole(); // هر شیء خودش داده‌هایش را دریافت میکند
+            addCustomer(customers, customerCount, c);
+            break;
+        }
+        case 5:
+        {
+            Order o;
+            o.readFromConsole(); // ساخت شیءِ سفارش مستقل از منطقِ ثبت آن
+            if (registerOrder(products, productCount, customers, customerCount, orders, orderCount, o))
+            {
+                cout << "Order registered successfully.\n";
+            }
+            break;
+        }
+        case 6:
+            showOrders(orders, orderCount, customers, customerCount);
+            break;
         }
     } while (choice != 0);
 
