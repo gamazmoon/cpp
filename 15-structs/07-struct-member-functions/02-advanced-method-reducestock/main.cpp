@@ -7,7 +7,7 @@
 // - حذف نیاز به ارسال ارجاع (&)؛ چون متد داخلی مستقیماً به اعضای خودِ شیء دسترسی دارد.
 //
 // مقایسه با بخش ۵:
-// به دانشجو نشان دهید که چگونه توابع printProduct و reduceStock از خارج ساختار به 
+// به دانشجو نشان دهید که چگونه توابع printProduct و reduceStock از خارج ساختار به
 // داخل آن منتقل شده‌اند و کد چقدر منظم‌تر و خواناتر شده است.
 // -----------------------------------------------------------------------------
 
@@ -27,7 +27,7 @@ struct Product
     // ۲) متد داخلی نمایش اطلاعات (چون درون struct است به تمام فیلدها دسترسی مستقیم دارد)
     void print() const
     {
-        cout << "ID: " << id << " | Name: " << name 
+        cout << "ID: " << id << " | Name: " << name
              << " | Stock: " << stock << " | Price: " << price << "\n";
     }
 
@@ -35,14 +35,17 @@ struct Product
     bool reduceStock(int qty)
     {
         if (qty <= 0)
-            return false;
-
-        if (stock >= qty)
         {
-            stock -= qty; // تغییر روی موجودی همین شیء اعمال می‌شود
-            return true;
+            return false;
         }
-        return false;
+
+        if (stock < qty)
+        {
+            return false;
+        }
+
+        stock = stock - qty; // تغییر روی موجودی همین شیء اعمال می‌شود
+        return true;
     }
 };
 

@@ -20,7 +20,7 @@ struct Product
 
     void print()
     {
-        cout << "ID: " << id << " | Name: " << name 
+        cout << "ID: " << id << " | Name: " << name
              << " | Stock: " << stock << " | Price: " << price << "\n";
     }
 };
@@ -28,8 +28,10 @@ struct Product
 int main()
 {
     Product myProduct = {101, "Rice", 30, 120};
+    Product myProduct2 = {102, "Oil", 25, 125};
 
-    myProduct.print(); 
+    myProduct.print();
+    myProduct2.print();
 
     return 0;
 }
