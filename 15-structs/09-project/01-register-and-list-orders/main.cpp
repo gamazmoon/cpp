@@ -175,7 +175,7 @@ int findCustomerIndexById(const Customer customers[], int count, int id)
             return i;
         }
     }
-    
+
     return -1;
 }
 
@@ -216,8 +216,10 @@ void showOrders(const Order orders[], int orderCount, const Customer customers[]
 
     for (int i = 0; i < orderCount; i = i + 1)
     {
-        int c = findCustomerIndexById(customers, customerCount, orders[i].customerId);
         string cname = "Unknown";
+        int customerId = orders[i].customerId;
+
+        int c = findCustomerIndexById(customers, customerCount, customerId);
         if (c != -1)
         {
             cname = customers[c].name;
@@ -240,7 +242,7 @@ void addProduct(Product items[], int &count, const Product &p)
     }
 
     items[count] = p; // کپی شیء آماده در آرایه
-    count++;
+    count = count + 1;
     cout << "Product added successfully.\n";
 }
 
@@ -290,7 +292,7 @@ bool registerOrder(Product items[], int productCount,
     }
 
     // ۳. فراخوانی متد کالا برای کاهش موجودی انبار
-    if (!items[pIdx].reduceStock(newOrder.quantity))
+    if ((items[pIdx].reduceStock(newOrder.quantity)) == false)
     {
         cout << "Not enough stock.\n";
         return false;
@@ -298,7 +300,7 @@ bool registerOrder(Product items[], int productCount,
 
     // ۴. ثبت سفارش در صورت عبور از تمام فیلترها
     orders[orderCount] = newOrder;
-    orderCount++;
+    orderCount = orderCount + 1;
     return true;
 }
 
@@ -331,31 +333,34 @@ int main()
         cout << "6 - Show orders\n";
         cout << "0 - Exit\n";
         cout << "Choice: ";
+
         cin >> choice;
 
-        switch (choice)
+        if (choice == 1)
         {
-        case 1:
             showProducts(products, productCount);
-            break;
-        case 2:
+        }
+
+        if (choice == 2)
+        {
             showCustomers(customers, customerCount);
-            break;
-        case 3:
+        }
+
+        if (choice == 3)
         {
             Product p;
-            p.readFromConsole();                   // لایه ورود اطلاعات (UI) کاملاً کپسوله و مستقل
-            addProduct(products, productCount, p); // لایه پردازش و ذخیره داده
-            break;
+            p.readFromConsole(); // لایه ورود اطلاعات (UI) کاملاً کپسوله و مستقل
+            addProduct(products, productCount, p);
         }
-        case 4:
+
+        if (choice == 4)
         {
             Customer c;
             c.readFromConsole(); // هر شیء خودش داده‌هایش را دریافت میکند
             addCustomer(customers, customerCount, c);
-            break;
         }
-        case 5:
+
+        if (choice == 5)
         {
             Order o;
             o.readFromConsole(); // ساخت شیءِ سفارش مستقل از منطقِ ثبت آن
@@ -363,12 +368,17 @@ int main()
             {
                 cout << "Order registered successfully.\n";
             }
-            break;
         }
-        case 6:
+
+        if (choice == 6)
+        {
             showOrders(orders, orderCount, customers, customerCount);
-            break;
         }
+
+        if(choice>6){
+            cout<<"Incorrect choice";
+        }
+
     } while (choice != 0);
 
     return 0;
